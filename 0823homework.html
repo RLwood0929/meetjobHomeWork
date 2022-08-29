@@ -1,0 +1,154 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>下拉式選單</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<style>
+       #menu{
+       	width: 100%;
+       	/*height: 70px;*/
+       	background-color: #555;
+       }
+       #menulist{
+         position:absolute;  /*定位 ： fixed 固定 absolute 依父位置做絕對位置*/
+         height:70px;
+       }
+       #menulist , #menulist ul{
+         list-style: none;
+         padding:0;
+         margin:0;
+       }
+       #menulist li{
+       	border-right: 1px solid #ffffff;
+       	float:left;
+       	background-color: #555;
+       }
+       #menulist a {
+       	color:#ffffff;
+       	display:block;
+       	text-decoration: none;
+         width:80px;
+       }
+       #menulist li ul{
+         position: absolute;  /* 位置是絕對位置 */
+         left:auto;  /*對於絕對位置元素，會依內容需要的寬度來設置*/
+         width:80px;
+       }
+       .active{
+         background-color: #ff0000;
+       }
+       #wlcome_picture{
+         width: 100%;
+         padding-top:40px;
+       }
+      #word{
+         width:200px;
+         margin:5px 0 5px 10px;
+      }
+      .catalog{
+         background-color: #225588;
+         color:#fff;
+         border-bottom: 1px solid #fff;
+      }
+      .item {
+         background-color: #A8D7E2;
+         margin:0;
+         padding:5px 5px 10px 5px;
+         list-style-type: none;
+      }
+      .item li{
+         margin:0;
+         padding:1px 0px;
+         display:block;  /* 顯示模式  block　區塊*/
+      }
+      </style>
+      <script>
+        $(document).ready(function(){
+             $("#menulist li ul").hide();
+             $("#menulist li").hover(
+                function(){
+                   $(this).find("ul").slideDown("fast");
+                   $(this).find("a:first").addClass("active");
+                },function(){
+                  $(this).find(".submenu").fadeOut("fast");
+                  $(this).find("a").removeClass("active");
+                });
+        });
+      </script>
+</head>
+<body>
+	<div id="menu">
+		<ul id="menulist">
+			<li><a href="#">產品</a>
+                <ul class="submenu">
+                	<li><a href="#">3C</a></li>
+                	<li><a href="#">家電</a></li>
+                	<li><a href="#">汽車</a></li>
+                </ul>
+			</li>	
+			<li><a href="#">服務</a>
+                <ul class="submenu">
+                	<li><a href="#">Line</a></li>
+                	<li><a href="#">來電客服</a></li>
+                	<li><a href="#">據點位置</a></li>
+                </ul>
+			</li>
+         <li><a href="#">企業文化</a>
+                <ul class="submenu">
+                  <li><a href="#">公司起源</a></li>
+                  <li><a href="#">公司架構</a></li>
+                  <li><a href="#">董事長專區</a></li>
+                </ul>
+         </li>
+         <li><a href="#">公司福利</a>
+                <ul class="submenu">
+                  <li><a href="#">勞健保</a></li>
+                  <li><a href="#">三節獎金</a></li>
+                  <li><a href="#">生育津貼</a></li>
+                </ul>
+         </li>
+			<li><a href="#">連絡我們</a></li>	
+		</ul>
+   </div>
+   <div id = "wlcome_picture">
+      <img src = "img/img2.jpg">
+   </div>
+   <div id = "word">
+      <div class="catalog">
+            <h2>程式語言</h2>
+      </div>
+      <ul class="item">
+         <li><a href="#">Python</a></li>
+         <li><a href="#">Java</a></li>
+         <li><a href="#">C#</a></li>
+      </ul>
+   </div>
+   <span id = "msg"></span>
+   年齡:<input type = "age" id = "age" name = "age" />
+   <br/>
+   <button id = "btn">送出</button>
+   <script>
+      $(document).ready(function(){
+         // visible 可見 (讓元素顯示出來 ，你會看到 ul 元素)
+         // hidden  不可見
+         //$('.item').hide();
+         $(".item").not(":first").hide();  // item 不是第一個的都隱藏
+         $(".item:first").show();
+         $(".catalog").click(function(){
+         $('.item:visible').slideUp('slow');
+         $(this).next().slideDown('slow');
+         })
+         $("#btn").click(function(){
+            var age = $("#age").val();
+            if(age>14 && age<51){
+               alert("天選之人");
+            }else{
+               alert("命中不是你");
+            }
+         })
+      });
+   </script>
+   <script type = "text/javascript">
+   </script>
+</body>
+</html>
